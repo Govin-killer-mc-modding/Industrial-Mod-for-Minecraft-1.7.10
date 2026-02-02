@@ -1,0 +1,4 @@
+itemGroup.industrialTab=Industrial Mod
+item.industrialIngot.name=Индустриальный слиток
+tile.industrialBlock.name=Индустриальный блок
+tile.industrialOre.name=Индустриальная руда
