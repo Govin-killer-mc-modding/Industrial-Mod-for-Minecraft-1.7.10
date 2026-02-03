@@ -1,0 +1,6 @@
+itemGroup.industrialTab=Industrial Mod
+item.industrialIngot.name=Industrial Ingot
+tile.industrialBlock.name=Industrial Block
+tile.industrialOre.name=Industrial Ore
+item.industrialHammer.name=Industrial Hammer
+item.industrialPlate.name=Industrial Plate

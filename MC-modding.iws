@@ -104,20 +104,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Minecraft Client.executor": "Run",
-    "Gradle.Build MC-modding.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/MC-modding/src/main/resources/assets/industrialmod/textures/blocks/items",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Minecraft Client.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build MC-modding.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/MC-modding/src/main/resources/assets/industrialmod/textures/blocks/items&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\MC-modding\src\main\resources\assets\industrialmod\textures\blocks\items" />
@@ -346,7 +347,9 @@
       <workItem from="1770043698482" duration="2992000" />
       <workItem from="1770047765988" duration="145000" />
       <workItem from="1770047929915" duration="20000" />
-      <workItem from="1770052928834" duration="146000" />
+      <workItem from="1770052928834" duration="956000" />
+      <workItem from="1770054661827" duration="110000" />
+      <workItem from="1770111712493" duration="4772000" />
     </task>
     <servers />
   </component>

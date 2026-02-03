@@ -2,3 +2,5 @@ itemGroup.industrialTab=Industrial Mod
 item.industrialIngot.name=Индустриальный слиток
 tile.industrialBlock.name=Индустриальный блок
 tile.industrialOre.name=Индустриальная руда
+item.industrialHammer.name=Индустриальный молот
+item.industrialPlate.name=Индустриальная пластина
