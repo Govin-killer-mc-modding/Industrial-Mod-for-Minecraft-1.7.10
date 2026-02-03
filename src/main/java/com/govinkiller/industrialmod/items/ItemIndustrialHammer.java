@@ -32,9 +32,9 @@ public class ItemIndustrialHammer extends Item {
         return false; // Не дает молоту вылетать из сетки
     }
     @Override
-    public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        // Проигрываем звук наковальни в момент крафта
-        world.playSoundAtEntity(player, "random.anvil_use", 0.5F, 1.0F);
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        world.playSoundAtEntity(player, "random.anvil_use", 1.0F, 1.0F);
+        return stack;
     }
 
 }

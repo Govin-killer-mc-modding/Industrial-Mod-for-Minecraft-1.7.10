@@ -29,7 +29,11 @@ public class IndustrialMod {
         public Item getTabIconItem() {
             return industrialIngot; // Иконка вкладки - ваш слиток
         }
-    };
+        @Override
+        public boolean hasSearchBar() {
+            return true; // ВКЛЮЧАЕМ возможность печатать
+        }
+    }.setBackgroundImageName("item_search.png"); // Добавляет поле поиска
 
     @EventHandler
     public void init(FMLInitializationEvent event) {

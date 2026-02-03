@@ -19,9 +19,9 @@ public class IndustrialWorldGen implements IWorldGenerator {
         if (world.provider.dimensionId == 0) {              // только Верхний мир
             this.runGenerator(
                     IndustrialMod.industrialOre,                // что генерируем
-                    8,                                          // размер жилы
-                    20,                                         // жил на чанк
-                    4, 32,                                      // высота Y
+                    6,                                          // размер жилы
+                    8,                                         // жил на чанк
+                    4, 48,                                      // высота Y
                     world, rand, chunkX*16, chunkZ*16);
         }
     }
