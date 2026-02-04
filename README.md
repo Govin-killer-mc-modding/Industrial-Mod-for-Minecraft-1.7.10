@@ -30,7 +30,7 @@ A custom industrial mod inspired by classic tech mods. I'm learning Java develop
 - **Localization:** Added translations for all new items (RU/EN).
 
 ---
-## 📅 Iteration №3: World Gen Balancing (03.02.2026 - 16:00)
+## 📅 Iteration #3: World Gen Balancing (03.02.2026)
 *Optimization and preparation for large-scale industrialization.*
 
 ### Changes:
@@ -40,3 +40,13 @@ A custom industrial mod inspired by classic tech mods. I'm learning Java develop
   - Set vertical spawn range (`minY/maxY`) to 4-48 levels.
 - **Git & Docs:** Updated repository structure and added future development roadmap.
 ---
+
+## 📅 Iteration #4: Metallurgy & Rubber Foundation (04.03.2026)
+*The core framework for the initial industrialization stage is now complete. A full processing cycle for Copper and Tin has been implemented.*
+
+### Changes:
+*   **Resources:** Added Copper and Tin ores with world generation in the Overworld.
+*   **Metallurgy:** Implemented Copper and Tin ingots with smelting mechanics.
+*   **Processing:** Added Copper and Tin plates, crafted using the Industrial Hammer.
+*   **Botany:** Integrated base blocks for the Rubber Tree (Log, Leaves, and Sapling) to prepare for the rubber production system.
+*   **Compatibility:** Fully integrated Ore Dictionary for seamless interaction with other industrial mods (e.g., IC2, GregTech).
