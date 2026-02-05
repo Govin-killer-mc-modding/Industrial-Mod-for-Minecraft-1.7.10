@@ -50,3 +50,15 @@ A custom industrial mod inspired by classic tech mods. I'm learning Java develop
 *   **Processing:** Added Copper and Tin plates, crafted using the Industrial Hammer.
 *   **Botany:** Integrated base blocks for the Rubber Tree (Log, Leaves, and Sapling) to prepare for the rubber production system.
 *   **Compatibility:** Fully integrated Ore Dictionary for seamless interaction with other industrial mods (e.g., IC2, GregTech).
+
+## 📅 Iteration #5: Rubber Tree Ecosystem and Tools (05.03.2026)
+*At this stage, work on the basic mechanics of resource cultivation was completed.*
+
+### Changes:
+*   **Growth mechanics:** Implemented the `IGrowable` interface for rubber tree seedlings. Now the tree can be grown instantly using bone meal.
+*   **Render fix:** Completely reworked foliage code (`BlockRubberLeaves`). Fixed transparency issue (shaders 1.7.10) and adjusted correct sapling drop (5% chance).
+*   **Toolkit:** Added the “Tap” item (`Tree Tap`).
+    *   Crafting via workbench implemented (5 sticks).
+    *   Item durability set (64 uses).
+* **Generation:** Seedling linked to unique structure generator `WorldGenRubberTree` to preserve tree identity when grown manually.
+* **Stability:** Reorganized the main mod class, fixed the order of item and block initialization to prevent recipe registration errors.

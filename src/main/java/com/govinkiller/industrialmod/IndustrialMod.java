@@ -1,89 +1,68 @@
 package com.govinkiller.industrialmod;
 
-import com.govinkiller.industrialmod.items.ItemCopperIngot;import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import com.govinkiller.industrialmod.blocks.BlockIndustrialBlock;
 import com.govinkiller.industrialmod.blocks.BlockIndustrialOre;
-import com.govinkiller.industrialmod.items.ItemIndustrialIngot;
-import com.govinkiller.industrialmod.items.ItemIndustrialHammer; // НОВОЕ
-import com.govinkiller.industrialmod.items.ItemIndustrialPlate;  // НОВОЕ
-import com.govinkiller.industrialmod.world.IndustrialWorldGen;
-import com.govinkiller.industrialmod.items.ItemTinIngot;
-import com.govinkiller.industrialmod.items.ItemCopperPlate;
-import com.govinkiller.industrialmod.items.ItemTinPlate;
 import com.govinkiller.industrialmod.blocks.ModBlocks;
-import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.registry.GameRegistry;
-
+import com.govinkiller.industrialmod.items.*;
+import com.govinkiller.industrialmod.world.IndustrialWorldGen;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.creativetab.CreativeTabs; // ВАЖНО: Импорт для вкладок
-import net.minecraft.item.Item; // ВАЖНО: Импорт для предметов
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
-@Mod(modid = "industrialmod", name = "Industrial Mod", version = "1.0")
+@Mod(modid = "industrialmod", name = "Industrial Mod", version = "2.0")
 public class IndustrialMod {
 
+    // Объявление всех объектов
     public static BlockIndustrialOre industrialOre;
     public static BlockIndustrialBlock industrialBlock;
-    public static ItemIndustrialIngot industrialIngot;
-    public static Item industrialHammer; // НОВОЕ
-    public static Item industrialPlate;  // НОВОЕ
+    public static Item industrialIngot;
+    public static Item industrialHammer;
+    public static Item industrialPlate;
     public static Item ingotCopper;
     public static Item ingotTin;
     public static Item plateCopper;
     public static Item plateTin;
+    public static Item treeTap;
 
-    // СОЗДАНИЕ ВКЛАДКИ
+    // Твоя творческая вкладка
     public static CreativeTabs tabIndustrial = new CreativeTabs("industrialTab") {
         @Override
         public Item getTabIconItem() {
-            return industrialIngot; // Иконка вкладки - ваш слиток
+            return industrialIngot;
         }
         @Override
         public boolean hasSearchBar() {
-            return true; // ВКЛЮЧАЕМ возможность печатать
+            return true;
         }
-    }.setBackgroundImageName("item_search.png"); // Добавляет поле поиска
+    }.setBackgroundImageName("item_search.png");
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        // ИЗМЕНИТЬ ТУТ: регистрируем блоки через наш менеджер
+    public void preInit(FMLPreInitializationEvent event) {
+        // 1. Сначала регистрируем блоки из ModBlocks
         ModBlocks.init();
         ModBlocks.register();
-    }
 
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
-        OreDictionary.registerOre("oreCopper", ModBlocks.oreCopper);
-        OreDictionary.registerOre("oreTin", ModBlocks.oreTin);
-        OreDictionary.registerOre("logWood", ModBlocks.rubberLog);
-        OreDictionary.registerOre("ingotCopper", ingotCopper);
-        OreDictionary.registerOre("ingotTin", ingotTin);
-        OreDictionary.registerOre("plateCopper", plateCopper);
-        OreDictionary.registerOre("plateTin", plateTin);
-
-
-        // 1. Руда
+        // 2. Создаем и регистрируем все предметы и блоки этого класса
         industrialOre = new BlockIndustrialOre();
         GameRegistry.registerBlock(industrialOre, "industrialOre");
 
-        // 2. Блок из слитков
         industrialBlock = new BlockIndustrialBlock();
         GameRegistry.registerBlock(industrialBlock, "industrialBlock");
 
-        // 3. Слиток
         industrialIngot = new ItemIndustrialIngot();
         GameRegistry.registerItem(industrialIngot, "industrialIngot");
 
-        // 4. Молот
-        industrialHammer = new ItemIndustrialHammer(); // НОВОЕ
+        industrialHammer = new ItemIndustrialHammer();
         GameRegistry.registerItem(industrialHammer, "industrialHammer");
 
-        // 3. Пластина
-        industrialPlate = new ItemIndustrialPlate();   // НОВОЕ
+        industrialPlate = new ItemIndustrialPlate();
         GameRegistry.registerItem(industrialPlate, "industrialPlate");
 
         ingotCopper = new ItemCopperIngot();
@@ -98,44 +77,48 @@ public class IndustrialMod {
         plateTin = new ItemTinPlate();
         GameRegistry.registerItem(plateTin, "plateTin");
 
-        /* ========== РЕЦЕПТЫ ========== */
+        // Регистрация краника через твой новый класс
+        treeTap = new ItemTreeTap();
+        GameRegistry.registerItem(treeTap, "treeTap");
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        // 3. Регистрация в словаре руд (OreDictionary)
+        OreDictionary.registerOre("oreCopper", ModBlocks.oreCopper);
+        OreDictionary.registerOre("oreTin", ModBlocks.oreTin);
+        OreDictionary.registerOre("logWood", ModBlocks.rubberLog);
+        OreDictionary.registerOre("treeLeaves", ModBlocks.rubberLeaves);
+        OreDictionary.registerOre("treeSapling", ModBlocks.rubberSapling);
+        OreDictionary.registerOre("ingotCopper", ingotCopper);
+        OreDictionary.registerOre("ingotTin", ingotTin);
+        OreDictionary.registerOre("plateCopper", plateCopper);
+        OreDictionary.registerOre("plateTin", plateTin);
+
+        // 4. Рецепты выплавки
         GameRegistry.addSmelting(industrialOre, new ItemStack(industrialIngot), 0.7F);
-
-        GameRegistry.addRecipe(new ItemStack(industrialBlock),
-                "XXX", "XXX", "XXX",
-                'X', industrialIngot);
-
-        GameRegistry.addShapelessRecipe(new ItemStack(industrialIngot, 9),
-                industrialBlock);
-
-        // НОВЫЙ РЕЦЕПТ: Молот (6 слитков и 1 палка)
-        GameRegistry.addRecipe(new ItemStack(industrialHammer),
-                "XXX",
-                "XXX",
-                " S ",
-                'X', industrialIngot,
-                'S', net.minecraft.init.Items.stick);
-
-        // НОВЫЙ РЕЦЕПТ: Пластина (Слиток + Молот)
-        // 32767 — это флаг, чтобы принимался молот с любой прочностью
-        GameRegistry.addShapelessRecipe(new ItemStack(industrialPlate),
-                industrialIngot, new ItemStack(industrialHammer, 1, 32767));
-
-        /* ========== РЕЦЕПТЫ 04.02.2026 cooper & tin ========== */
-
-        // Переплавка руды в слитки
         GameRegistry.addSmelting(ModBlocks.oreCopper, new ItemStack(ingotCopper), 0.5F);
         GameRegistry.addSmelting(ModBlocks.oreTin, new ItemStack(ingotTin), 0.5F);
 
-        // Создание пластин (Слиток + твой Молот)
-        // Используем 32767 для игнорирования урона молота
-        GameRegistry.addShapelessRecipe(new ItemStack(plateCopper),
-                ingotCopper, new ItemStack(industrialHammer, 1, 32767));
+        // 5. Верстачные рецепты
+        GameRegistry.addRecipe(new ItemStack(industrialBlock), "XXX", "XXX", "XXX", 'X', industrialIngot);
+        GameRegistry.addShapelessRecipe(new ItemStack(industrialIngot, 9), industrialBlock);
 
-        GameRegistry.addShapelessRecipe(new ItemStack(plateTin),
-                ingotTin, new ItemStack(industrialHammer, 1, 32767));
+        // Молот
+        GameRegistry.addRecipe(new ItemStack(industrialHammer), "XXX", "XXX", " S ", 'X', industrialIngot, 'S', Items.stick);
 
-        /* ========== ГЕНЕРАЦИЯ В МИРЕ ========== */
+        // КРАНИК (проверь форму на верстаке: "носик" влево)
+        // Бесформенный рецепт: просто 5 палок в сетке крафта
+        GameRegistry.addShapelessRecipe(new ItemStack(treeTap),
+                Items.stick, Items.stick, Items.stick, Items.stick, Items.stick
+        );
+
+        // Пластины
+        GameRegistry.addShapelessRecipe(new ItemStack(industrialPlate), industrialIngot, new ItemStack(industrialHammer, 1, 32767));
+        GameRegistry.addShapelessRecipe(new ItemStack(plateCopper), ingotCopper, new ItemStack(industrialHammer, 1, 32767));
+        GameRegistry.addShapelessRecipe(new ItemStack(plateTin), ingotTin, new ItemStack(industrialHammer, 1, 32767));
+
+        // 6. Генерация мира
         GameRegistry.registerWorldGenerator(new IndustrialWorldGen(), 1);
     }
 }
