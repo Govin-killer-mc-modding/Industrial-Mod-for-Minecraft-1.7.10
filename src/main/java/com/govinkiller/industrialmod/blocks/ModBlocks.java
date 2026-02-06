@@ -29,10 +29,13 @@ public class ModBlocks {
     }
 
     public static void register() {
-        GameRegistry.registerBlock(oreCopper, "oreCopper");
-        GameRegistry.registerBlock(oreTin, "oreTin");
-        GameRegistry.registerBlock(rubberLog, "rubberLog");
-        GameRegistry.registerBlock(rubberLeaves, "rubberLeaves");
-        GameRegistry.registerBlock(rubberSapling, "rubberSapling");
+            GameRegistry.registerBlock(oreCopper, "oreCopper");
+            GameRegistry.registerBlock(oreTin, "oreTin");
+
+            // Возвращаем стандартную регистрацию - это уберет вылет
+            GameRegistry.registerBlock(rubberLog, "rubberLog");
+
+            GameRegistry.registerBlock(rubberLeaves, "rubberLeaves");
+            GameRegistry.registerBlock(rubberSapling, "rubberSapling");
+        }
     }
-}

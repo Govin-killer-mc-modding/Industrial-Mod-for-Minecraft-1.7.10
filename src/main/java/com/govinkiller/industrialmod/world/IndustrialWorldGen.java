@@ -46,7 +46,6 @@ public class IndustrialWorldGen implements IWorldGenerator {
     }
 
     private void generateTreesInBiome(World world, Random random, int x, int z) {
-        // Создаем генератор (высота 5, наши блоки)
         WorldGenRubberTree rubberTreeGenerator = new WorldGenRubberTree(true, 5, ModBlocks.rubberLog, ModBlocks.rubberLeaves, false);
         BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
 
@@ -54,17 +53,19 @@ public class IndustrialWorldGen implements IWorldGenerator {
 
         // ПРОВЕРКА БИОМОВ:
         if (biome == BiomeGenBase.jungle || biome == BiomeGenBase.jungleEdge || biome == BiomeGenBase.swampland) {
-            // В джунглях и болотах — шанс высокий (каждый 2-й чанк)
+            // В джунглях/болотах: шанс высокий (каждый 2-й чанк), 0-1 дерево
             if (random.nextInt(2) == 0) {
-                attempts = random.nextInt(2) + 1; // 1-2 дерева
+                attempts = random.nextInt(1);
             }
         }
         else {
-            // В остальных биомах — редко (шанс 5%, т.е. 1 из 20 чанков)
-            if (random.nextInt(20) == 0) {
+            // В остальных биомах: очень редко (шанс 1%, т.е. 1 из 100 чанков)
+            if (random.nextInt(100) == 0) {
                 attempts = 1;
             }
         }
+
+        // ... (остальной код по поиску почвы и установке дерева остается прежним) ...
 
         // Цикл попыток установки дерева
         for (int i = 0; i < attempts; i++) {

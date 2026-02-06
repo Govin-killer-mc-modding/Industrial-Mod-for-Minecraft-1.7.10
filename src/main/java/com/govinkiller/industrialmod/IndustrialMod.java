@@ -19,7 +19,6 @@ import net.minecraftforge.oredict.OreDictionary;
 @Mod(modid = "industrialmod", name = "Industrial Mod", version = "2.0")
 public class IndustrialMod {
 
-    // Объявление всех объектов
     public static BlockIndustrialOre industrialOre;
     public static BlockIndustrialBlock industrialBlock;
     public static Item industrialIngot;
@@ -30,26 +29,32 @@ public class IndustrialMod {
     public static Item plateCopper;
     public static Item plateTin;
     public static Item treeTap;
+    public static Item latex;
+    public static Item rubber; // ДОБАВЬ ЭТУ СТРОКУ
 
-    // Твоя творческая вкладка
-    public static CreativeTabs tabIndustrial = new CreativeTabs("industrialTab") {
-        @Override
-        public Item getTabIconItem() {
-            return industrialIngot;
-        }
-        @Override
-        public boolean hasSearchBar() {
-            return true;
-        }
-    }.setBackgroundImageName("item_search.png");
+    // Объявляем вкладку здесь, но инициализируем в preInit
+    public static CreativeTabs tabIndustrial;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        // 1. Сначала регистрируем блоки из ModBlocks
+        // 1. ИНИЦИАЛИЗАЦИЯ ВКЛАДКИ (Первым делом!)
+        tabIndustrial = new CreativeTabs("industrialTab") {
+            @Override
+            public Item getTabIconItem() {
+                // Безопасная проверка: если слитка еще нет, покажет палку
+                return industrialIngot != null ? industrialIngot : Items.stick;
+            }
+            @Override
+            public boolean hasSearchBar() {
+                return true;
+            }
+        }.setBackgroundImageName("item_search.png");
+
+        // 2. РЕГИСТРАЦИЯ БЛОКОВ
         ModBlocks.init();
         ModBlocks.register();
 
-        // 2. Создаем и регистрируем все предметы и блоки этого класса
+        // 3. РЕГИСТРАЦИЯ ОБЫЧНЫХ ОБЪЕКТОВ
         industrialOre = new BlockIndustrialOre();
         GameRegistry.registerBlock(industrialOre, "industrialOre");
 
@@ -77,14 +82,21 @@ public class IndustrialMod {
         plateTin = new ItemTinPlate();
         GameRegistry.registerItem(plateTin, "plateTin");
 
-        // Регистрация краника через твой новый класс
+        latex = new ItemLatex();
+        GameRegistry.registerItem(latex, "latex");
+
+        // 4. РЕГИСТРАЦИЯ КРАНИКА (В самом конце, так как он зависит от всего выше)
         treeTap = new ItemTreeTap();
         GameRegistry.registerItem(treeTap, "treeTap");
+
+        rubber = new ItemRubber();
+        GameRegistry.registerItem(rubber, "rubber");
+
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        // 3. Регистрация в словаре руд (OreDictionary)
+        // РЕГИСТРАЦИЯ В СЛОВАРЕ РУД
         OreDictionary.registerOre("oreCopper", ModBlocks.oreCopper);
         OreDictionary.registerOre("oreTin", ModBlocks.oreTin);
         OreDictionary.registerOre("logWood", ModBlocks.rubberLog);
@@ -94,31 +106,28 @@ public class IndustrialMod {
         OreDictionary.registerOre("ingotTin", ingotTin);
         OreDictionary.registerOre("plateCopper", plateCopper);
         OreDictionary.registerOre("plateTin", plateTin);
+        OreDictionary.registerOre("itemRubber", rubber);
 
-        // 4. Рецепты выплавки
+
+        // РЕЦЕПТЫ ВЫПЛАВКИ
         GameRegistry.addSmelting(industrialOre, new ItemStack(industrialIngot), 0.7F);
         GameRegistry.addSmelting(ModBlocks.oreCopper, new ItemStack(ingotCopper), 0.5F);
         GameRegistry.addSmelting(ModBlocks.oreTin, new ItemStack(ingotTin), 0.5F);
+        // Обжиг латекса дает резину. 0.1F — это опыт за переплавку.
+        GameRegistry.addSmelting(latex, new ItemStack(rubber), 0.1F);
 
-        // 5. Верстачные рецепты
+        // РЕЦЕПТЫ ВЕРСТАКА
         GameRegistry.addRecipe(new ItemStack(industrialBlock), "XXX", "XXX", "XXX", 'X', industrialIngot);
         GameRegistry.addShapelessRecipe(new ItemStack(industrialIngot, 9), industrialBlock);
-
-        // Молот
         GameRegistry.addRecipe(new ItemStack(industrialHammer), "XXX", "XXX", " S ", 'X', industrialIngot, 'S', Items.stick);
 
-        // КРАНИК (проверь форму на верстаке: "носик" влево)
-        // Бесформенный рецепт: просто 5 палок в сетке крафта
-        GameRegistry.addShapelessRecipe(new ItemStack(treeTap),
-                Items.stick, Items.stick, Items.stick, Items.stick, Items.stick
-        );
+        // БЕСФОРМЕННЫЙ КРАФТ КРАНИКА (5 палок)
+        GameRegistry.addShapelessRecipe(new ItemStack(treeTap), Items.stick, Items.stick, Items.stick, Items.stick, Items.stick);
 
-        // Пластины
         GameRegistry.addShapelessRecipe(new ItemStack(industrialPlate), industrialIngot, new ItemStack(industrialHammer, 1, 32767));
         GameRegistry.addShapelessRecipe(new ItemStack(plateCopper), ingotCopper, new ItemStack(industrialHammer, 1, 32767));
         GameRegistry.addShapelessRecipe(new ItemStack(plateTin), ingotTin, new ItemStack(industrialHammer, 1, 32767));
 
-        // 6. Генерация мира
         GameRegistry.registerWorldGenerator(new IndustrialWorldGen(), 1);
     }
 }

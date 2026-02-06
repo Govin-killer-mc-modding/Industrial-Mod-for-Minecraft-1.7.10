@@ -41,7 +41,7 @@ A custom industrial mod inspired by classic tech mods. I'm learning Java develop
 - **Git & Docs:** Updated repository structure and added future development roadmap.
 ---
 
-## 📅 Iteration #4: Metallurgy & Rubber Foundation (04.03.2026)
+## 📅 Iteration #4: Metallurgy & Rubber Foundation (04.02.2026)
 *The core framework for the initial industrialization stage is now complete. A full processing cycle for Copper and Tin has been implemented.*
 
 ### Changes:
@@ -51,7 +51,7 @@ A custom industrial mod inspired by classic tech mods. I'm learning Java develop
 *   **Botany:** Integrated base blocks for the Rubber Tree (Log, Leaves, and Sapling) to prepare for the rubber production system.
 *   **Compatibility:** Fully integrated Ore Dictionary for seamless interaction with other industrial mods (e.g., IC2, GregTech).
 
-## 📅 Iteration #5: Rubber Tree Ecosystem and Tools (05.03.2026)
+## 📅 Iteration #5: Rubber Tree Ecosystem and Tools (05.02.2026)
 *At this stage, work on the basic mechanics of resource cultivation was completed.*
 
 ### Changes:
@@ -62,3 +62,38 @@ A custom industrial mod inspired by classic tech mods. I'm learning Java develop
     *   Item durability set (64 uses).
 * **Generation:** Seedling linked to unique structure generator `WorldGenRubberTree` to preserve tree identity when grown manually.
 * **Stability:** Reorganized the main mod class, fixed the order of item and block initialization to prevent recipe registration errors.
+
+## 📅 Iteration #6: Unique rubber tree and localization (06.02.2026)
+*At this stage, the unique rubber harvesting mechanic was fully implemented and multilingual support was added.*
+
+### Changes:
+*   **Unique palm tree generator**: The shape of the trees was changed from oak to palm (tall trunk, dense crown). The spawn rate in normal biomes was reduced to 1%.
+*   **Latex mechanics**: Latex spots now only appear on the **north side** of the trunk when the tree is generated (20% chance). .
+*   **Tool balancing**: The durability of the “Tap” has been reduced to **32** uses. Random latex drops have been added (**1 to 3** units per collection).
+*   **Production**: Added the item “Rubber” (`itemRubber`) and a recipe for smelting latex in a furnace.
+*   **Localization**: Added `en_US.lang` and `ru_RU.lang` files with full translations of all new items and blocks.
+
+<h2 align="center">📸 Mod Preview</h2>
+
+<p align="center">
+  <table align="center">
+    <tr>
+      <td align="center" valign="top">
+        <img src="./screenshots/palm.png" width="250px" alt="Rubber Palm"/>
+        <br>
+        <sub><b>Rubber Palm</b><br>Unique tree generation</sub>
+      </td>
+      <td align="center" valign="top">
+        <img src="./screenshots/extraction.png" width="250px" alt="Latex Extraction"/>
+        <br>
+        <sub><b>Latex Extraction</b><br>Using the Tree Tap</sub>
+      </td>
+      <td align="center" valign="top">
+        <img src="./screenshots/inventory.png" width="250px" alt="Items"/>
+        <br>
+        <sub><b>New Items</b><br>Latex & Tools</sub>
+      </td>
+    </tr>
+  </table>
+</p>
+

@@ -3,11 +3,13 @@ package com.govinkiller.industrialmod.blocks;
 import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import com.govinkiller.industrialmod.IndustrialMod;
 
 public class BlockRubberLeaves extends BlockLeaves {
@@ -15,32 +17,60 @@ public class BlockRubberLeaves extends BlockLeaves {
     public BlockRubberLeaves() {
         super();
         this.setBlockName("rubberLeaves");
-        // Важно: здесь название должно СТРОГО совпадать с файлом в assets
         this.setBlockTextureName("industrialmod:rubberLeaves");
         this.setCreativeTab(IndustrialMod.tabIndustrial);
     }
 
-    // 1. Исправляем прозрачность (убираем дыры в мир)
+    // --- ИСПРАВЛЕНИЕ ОСЫПАНИЯ ---
+    @Override
+    public void updateTick(World world, int x, int y, int z, Random random) {
+        if (!world.isRemote) {
+            int meta = world.getBlockMetadata(x, y, z);
+
+            // Если листва не поставлена игроком вручную
+            if ((meta & 8) != 0 && (meta & 4) == 0) {
+                byte range = 4;
+                int maxRange = range + 1;
+                byte checkArea = 32;
+                int offset = checkArea / 2;
+
+                // Проверяем блоки вокруг
+                for (int dx = -range; dx <= range; ++dx) {
+                    for (int dy = -range; dy <= range; ++dy) {
+                        for (int dz = -range; dz <= range; ++dz) {
+                            Block block = world.getBlock(x + dx, y + dy, z + dz);
+
+                            // Если рядом есть наше бревно - листва ЖИВЕТ
+                            if (block == ModBlocks.rubberLog) {
+                                return;
+                            }
+                        }
+                    }
+                }
+                // Если бревно не нашли - листва УМИРАЕТ (превращается в саженец)
+                this.dropBlockAsItem(world, x, y, z, meta, 0);
+                world.setBlockToAir(x, y, z);
+            }
+        }
+    }
+
     @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
-    // 2. Метод для отрисовки текстуры (исправляет черно-розовые кубы)
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register) {
         this.blockIcon = register.registerIcon("industrialmod:rubberLeaves");
     }
 
-    // 3. Исправляем вылет при рендере
     @Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
         return true;
     }
 
-    // 4. Выпадение саженца (шанс 5%)
     @Override
     public Item getItemDropped(int metadata, Random random, int fortune) {
         return Item.getItemFromBlock(ModBlocks.rubberSapling);
@@ -51,14 +81,11 @@ public class BlockRubberLeaves extends BlockLeaves {
         return random.nextInt(20) == 0 ? 1 : 0;
     }
 
-    // --- ОБЯЗАТЕЛЬНЫЕ МЕТОДЫ-ЗАГЛУШКИ ДЛЯ 1.7.10 ---
-
     @Override
     public String[] func_150125_e() {
         return new String[] {"rubberLeaves"};
     }
 
-    // Без Override, чтобы IDE не ругалась, если метод не основной
     public String[] func_150129_e() {
         return new String[] {"rubberLeaves"};
     }
