@@ -97,3 +97,19 @@ A custom industrial mod inspired by classic tech mods. I'm learning Java develop
   </table>
 </p>
 
+## ⚙️ Industrial Mod: Coal Generator (13.02.2026)
+*This mod adds the Coal Generator to the game—a basic mechanism for generating RF energy in the early stages of development.*
+### Changes:
+* **Efficient generation**: 1 unit of regular coal generates a total of 16,000 RF.
+* **Balance**: The generation rate is 10 RF/tick, making it a stable energy source for early machines.
+* **Unique interface**:
+* **Triangular Burn Indicator**: An animated triangular indicator showing the combustion process of the current fuel.
+* **Segmented Energy Scale**: A visual vertical scale for tracking the charge level of the internal buffer (16,000 RF).
+* **Smart Mode**: The generator automatically reduces output or goes into standby mode when the internal storage is full.
+* **Visualization**: The block changes its texture (Active state) during operation, illuminating the surrounding space.
+🛠 Technical Details
+* **Minecraft Version**: `1.7.10`
+* **Energy Type**: `Redstone Flux (RF)`
+* **Buffer Capacity**: `16,000 RF`
+* **Input Slot**: `1 slot for any type of vanilla fuel (coal, wood, lava buckets).`
+
