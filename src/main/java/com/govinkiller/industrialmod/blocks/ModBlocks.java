@@ -10,6 +10,8 @@ public class ModBlocks {
     public static Block rubberLog;
     public static Block rubberLeaves;
     public static Block rubberSapling;
+    // 1. Объяви переменную (вверху класса)
+    public static Block coalGenerator;
 
     public static void init() {
         oreCopper = new BlockCopperOre();
@@ -26,6 +28,7 @@ public class ModBlocks {
         rubberSapling = new BlockRubberSapling()
                 .setBlockName("rubberSapling")
                 .setCreativeTab(IndustrialMod.tabIndustrial);
+        coalGenerator = new BlockCoalGenerator();
     }
 
     public static void register() {
@@ -37,5 +40,6 @@ public class ModBlocks {
 
             GameRegistry.registerBlock(rubberLeaves, "rubberLeaves");
             GameRegistry.registerBlock(rubberSapling, "rubberSapling");
+            GameRegistry.registerBlock(coalGenerator, "coalGenerator");
         }
     }

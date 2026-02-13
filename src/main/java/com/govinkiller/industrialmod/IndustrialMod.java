@@ -19,6 +19,8 @@ import net.minecraftforge.oredict.OreDictionary;
 @Mod(modid = "industrialmod", name = "Industrial Mod", version = "2.0")
 public class IndustrialMod {
 
+    @Mod.Instance("industrialmod")
+    public static IndustrialMod instance;
     public static BlockIndustrialOre industrialOre;
     public static BlockIndustrialBlock industrialBlock;
     public static Item industrialIngot;
@@ -49,7 +51,9 @@ public class IndustrialMod {
                 return true;
             }
         }.setBackgroundImageName("item_search.png");
-
+        cpw.mods.fml.common.network.NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+        // Регистрация TileEntity (мозгов генератора)
+        cpw.mods.fml.common.registry.GameRegistry.registerTileEntity(com.govinkiller.industrialmod.tileentity.TileEntityCoalGenerator.class, "tileEntityCoalGenerator");
         // 2. РЕГИСТРАЦИЯ БЛОКОВ
         ModBlocks.init();
         ModBlocks.register();
