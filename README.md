@@ -97,7 +97,7 @@ A custom industrial mod inspired by classic tech mods. I'm learning Java develop
   </table>
 </p>
 
-## ⚙️ Industrial Mod: Coal Generator (13.02.2026)
+## ⚙️ Change Test: Coal Generator (13.02.2026)
 *This mod adds the Coal Generator to the game—a basic mechanism for generating RF energy in the early stages of development.*
 ### Changes:
 * **Efficient generation**: 1 unit of regular coal generates a total of 16,000 RF.
